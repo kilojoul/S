@@ -1,10 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
-    <style> body, html { margin: 0; height: 100%; } model-viewer { width: 100%; height: 100%; background-color: #ffffff; } </style>
+    
+    <style>
+      body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+      
+      model-viewer {
+        width: 100%;
+        height: 100%;
+        background-color: #f7f7f7;
+      }
+
+      /* This is your "Pro" AR Button */
+      #custom-ar-button {
+        background-color: #E26E3A; /* Your design's orange */
+        color: white;
+        border: none;
+        border-radius: 50px; /* Makes it pill-shaped */
+        padding: 18px 36px;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        
+        /* Centering it perfectly at the bottom */
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        
+        /* Makes it look clickable with a shadow */
+        box-shadow: 0px 8px 20px rgba(226, 110, 58, 0.4);
+        cursor: pointer;
+        z-index: 100;
+        
+        /* Smooth transition for a "hover" effect */
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+
+      #custom-ar-button:active {
+        transform: translateX(-50%) scale(0.95); /* Squishes slightly when tapped */
+        background-color: #c95d2e;
+      }
+
+      /* Optional: A subtle hint text above the button */
+      .ar-hint {
+        position: absolute;
+        bottom: 110px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #666;
+        font-size: 14px;
+        text-align: center;
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
-    <model-viewer src="S.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls></model-viewer>
+
+    <model-viewer 
+      src="S.glb" 
+      ar 
+      ar-modes="webxr scene-viewer quick-look" 
+      camera-controls 
+      shadow-intensity="1" 
+      auto-rotate>
+      
+      <div class="ar-hint">See this item in your space</div>
+
+      <button slot="ar-button" id="custom-ar-button">
+        START AR VIEW
+      </button>
+
+    </model-viewer>
+
   </body>
 </html>
